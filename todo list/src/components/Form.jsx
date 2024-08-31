@@ -6,7 +6,6 @@ const Form = ({ setTodos, todos, id, setId }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (id) {
       updatebyid(id);
       setId("");
@@ -19,14 +18,12 @@ const Form = ({ setTodos, todos, id, setId }) => {
       setTodos([...todos, obj]);
     }
     setId("");
-
     setTitle("");
     setDescription("");
   };
   useEffect(() => {
     if (id) {
       const updated = todos.filter((d) => d.id === id);
-      console.log(updated);
       setTitle(updated[0].title);
       setDescription(updated[0].description);
     }
@@ -41,6 +38,12 @@ const Form = ({ setTodos, todos, id, setId }) => {
       prevdata.map((todo) => (todo.id === id ? { ...todo, ...objs } : todo))
     );
   };
+
+  const danger = () => {
+    if(title,description === ""){
+      alert("please enter the field")
+    }
+  }
 
   return (
     <>
@@ -69,7 +72,7 @@ const Form = ({ setTodos, todos, id, setId }) => {
             onChange={(e) => setDescription(e.target.value)}
           />
           {id && <button className="btn btn-warning">Edit</button>}
-          {!id && <button className="btn btn-warning">Add</button>}
+          {!id && <button onClick={danger} className="btn btn-warning">Add</button>}
         </div>
       </form>
     </>
